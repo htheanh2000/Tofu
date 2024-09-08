@@ -5,6 +5,7 @@
   "dependencies": {
     "@emotion/react": "^11.13.3",
     "@emotion/styled": "^11.13.0",
+    "@koale/useworker": "^4.0.2",
     "@mui/material": "^6.0.2",
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^13.0.0",
@@ -18,6 +19,7 @@
     "react-dom": "^18.3.1",
     "react-dropzone": "^14.2.3",
     "react-scripts": "5.0.1",
+    "react-toast-notifications": "^2.5.1",
     "typescript": "^4.4.2",
     "web-vitals": "^2.1.0"
   },
