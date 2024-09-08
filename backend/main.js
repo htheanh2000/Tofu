@@ -2,9 +2,16 @@ const express = require('express');
 const multer = require('multer');
 const cors = require('cors');
 const app = express();
-app.use(cors({
-    origin: '*'
-}));
+
+const corsOptions = {
+    origin: '*', // Change this to your specific domain in production for better security
+    methods: 'GET,OPTIONS,PATCH,DELETE,POST,PUT',
+    allowedHeaders: 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version',
+    credentials: true
+  };
+  
+  app.use(cors(corsOptions));
+
 // Middleware to parse incoming JSON requests
 app.use(express.json());
 app.use(cors());
