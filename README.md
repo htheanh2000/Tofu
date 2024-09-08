@@ -1,17 +1,51 @@
-## **React App Task: Multi-File Upload with Concurrent Handling**
 
-You are required to develop a simple React application that allows users to drag and drop multiple files into the UI and upload them concurrently. The application should display a file list with the upload status for each file (e.g., uploading, success, failure). The upload process should support concurrency handling, meaning multiple files can be uploaded simultaneously. You are free to use any mock or actual API for the upload functionality.
+# React App Task: Multi-File Upload with Concurrent Handling
 
-As part of this task, we would like you to make thoughtful decisions regarding how you handle state management in React. Choose the most appropriate approach for managing the state of the file uploads (whether it be hooks, context, or another React-specific method), and explain your reasoning behind your choice.
+A simple React application that allows users to drag and drop multiple files into the UI and upload them concurrently.
 
-The UI should be styled using Material-UI (MUI) components to provide a clean, responsive design.
+## Requirement:
 
-The key aspects we are looking for are:
+### UI/UX Requirement:
+- Display a file list with the upload status for each file (e.g., uploading, success, failure)
+- Display a section to allow users to drag and drop multiple files 
 
-- Efficient handling of concurrent file uploads.
-- Clean and maintainable code.
+### Functional Requirement:
+- Files ard uploaded concurrently (6 connection at the same time)
+- using mock api with response time around 10-15s and 10% failed
+- Tech stacks: ReactJS, MUI
+
+### Non Functional Requirement:
+- Clean and maintainable code
 - A clear, well-explained choice for state management.
-- Use of MUI for styling and responsiveness.
+- Nice styling and responsiveness
 
-Feel free to add any additional features or improvements you think would enhance the user experience.
+### Out of scope
+- Handle large/heavy file: >4gb.
+- Handle exceed maximum connection of web brower: That a BIG problems as I research. 
+
+### Addtional Requirement:
+- Retried logic
+
+### Solution explaination:
+- useFileUpload: Using custom hook to handle api call process included retry and error logic
+- useState: handle files data using useState, it simply to implement.
+- Fileprogress component: Progress indicators UI
+- Dropzone component: Dropzone container UI
+
+### Project limitation:
+- File size: 4Gb. That is limitation of multer - a library for backend. In case we handle large file, we need to change logic in backend side to chunking file processing. However, it's kind of out of scope.
+
+- Connection: Max Number of default simultaneous persistent connections per server/proxy (Eg: Chrome is 6)
+
+
+### How to Run 
+
+- Clone repo 
+- cd backend && npm i && npm start (it should run with port 3000)
+- cd .. && cd frontend && yarn && yarn start (it should run with port 3001)
+
+
+
+
+
 
