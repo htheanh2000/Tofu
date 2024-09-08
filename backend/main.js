@@ -7,13 +7,14 @@ const app = express();
 // Middleware to parse incoming JSON requests
 app.use(express.json());
 app.use(cors());
-// Set up multer for file uploads
-const upload = multer({ dest: 'uploads/' });
+// Set up multer for file uploads without storing the file
+const storage = multer.memoryStorage();
+const upload = multer({ storage: storage });
 
 // Fake file upload API
 app.post('/upload', upload.single('file'), (req, res) => {
-    // const { fileName } = req.body;
-    console.log(req.file);
+    try {
+        // const { fileName } = req.body;
     const file = req.file;
     // Ensure the file name is provided
     if (!file) {
@@ -24,15 +25,14 @@ app.post('/upload', upload.single('file'), (req, res) => {
 
     const fileName = file.originalname;
 
-    console.log(`File upload initiated for ${file}...`);
+    console.log(`File upload initiated for ${file.originalname}...`);
 
     // Generate a random time between 10 and 15 seconds
-    // const uploadTime = Math.floor(Math.random() * 5000) + 10000;
-    const uploadTime = 100;
+    const uploadTime = Math.floor(Math.random() * 5000) + 10000;
     // Simulate the upload process
     setTimeout(() => {
         // Generate a random number to decide if the upload succeeds or fails
-        const isSuccess = Math.random() < 0.5; // 90% chance of success
+        const isSuccess = Math.random() < 0.7; // 90% chance of success
 
         if (isSuccess) {
             console.log(`File upload successful for ${fileName} after ${uploadTime} ms`);
@@ -50,6 +50,10 @@ app.post('/upload', upload.single('file'), (req, res) => {
             });
         }
     }, uploadTime);
+    } catch (error) {
+        
+    }
+    
 });
 
 // Start the server on port 3000
