@@ -45,7 +45,7 @@ const Dropzone = () => {
                         <>
                             <UploadFileIcon fontSize='large' className={styles.uploadIcon} />
                             <Box component="p" className={styles.uploadFormat}>
-                                PNG, GIF, WEBP, MP4, PDF, DOCX, XLSX. Max 5000Mb.
+                                Drag and drop here. Max 500Mb.
                             </Box>
                         </>
                 </Box>
