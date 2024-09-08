@@ -22,7 +22,7 @@ const useFileUpload = () => {
             formData.append("file", file);
 
             const attemptUpload = (retryCount: number) => {
-                axios.post("http://localhost:3000/upload", formData, {
+                axios.post(`${process.env.REACT_APP_API_URL}/upload`, formData, {
                     onUploadProgress: (progressEvent: AxiosProgressEvent) => {
                         const progress = progressEvent.total
                             ? (progressEvent.loaded / progressEvent.total) * 100
