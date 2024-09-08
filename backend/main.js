@@ -2,6 +2,9 @@ const express = require('express');
 const multer = require('multer');
 const cors = require('cors');
 const app = express();
+app.use(cors({
+    origin: '*'
+}));
 // Middleware to parse incoming JSON requests
 app.use(express.json());
 app.use(cors());
