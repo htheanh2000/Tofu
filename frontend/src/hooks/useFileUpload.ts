@@ -1,11 +1,14 @@
 import axios, { AxiosProgressEvent } from "axios";
 import { useState } from "react";
 
-interface FileWithStatus {
+export interface FileWithStatus {
     file: File;
     status: 'pending' | 'success' | 'error';
     progress?: number;
 }
+
+export type TFileStatus =  'pending' | 'success' | 'error';
+
 
 const MAX_RETRIES = 3;
 

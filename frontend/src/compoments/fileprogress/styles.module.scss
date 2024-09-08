@@ -7,19 +7,30 @@
     border-radius: 8px;
     background-color: #fff;
     margin-bottom: 12px;
+
+    @media (max-width: 600px) {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+    }
   }
   
   .fileInfo {
     display: flex;
     align-items: center;
+    width: 200px;
   }
   
   .fileIcon {
-    color: #7e22ce; // Similar purple color for the file icon
+    color: #2938ac; // Similar purple color for the file icon
     margin-right: 12px;
   }
   
   .fileName {
+    max-width: 150px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
     font-size: 1rem;
     font-weight: 500;
     color: #333;
@@ -36,16 +47,26 @@
     align-items: center;
     flex-grow: 1;
     margin-left: 16px;
+    margin-right: 16px;
     justify-content: space-between;
+    @media (max-width: 600px) {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+        flex-direction:row-reverse;
+    }
   }
   
   .progressBar {
     width: 100%;
-    height: 8px;
-    border-radius: 4px;
-    background-color: #e0e0e0;
-    .MuiLinearProgress-bar {
-      background-color: #7e22ce; // Same purple color for the progress bar
+    height: 12px;
+    border-radius: 8px;
+    margin-right: 16px;
+    background-color: #a9a7a7;
+    @media (max-width: 600px) {
+        height: 8px;
+        margin-right: 0;
+        margin-left: 12px;
     }
   }
   
@@ -53,5 +74,9 @@
     font-size: 0.875rem;
     margin-left: 16px;
     color: #666;
+    @media (max-width: 600px) {
+        margin-left: 0;
+        // margin-right: 16px;
+    }
   }
   

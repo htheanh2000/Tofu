@@ -2,21 +2,28 @@ import React from 'react';
 import { Box, Typography, LinearProgress } from '@mui/material';
 import InsertDriveFileIcon from '@mui/icons-material/InsertDriveFile';
 import styles from './styles.module.scss'; // Import the SCSS file
+import PictureAsPdfIcon from '@mui/icons-material/PictureAsPdf';
+import ArticleIcon from '@mui/icons-material/Article';
+import ImageIcon from '@mui/icons-material/Image';
+import VideoIcon from '@mui/icons-material/VideoFile';
+import { TFileStatus } from '../../hooks/useFileUpload';
 
 interface FileProgressProps {
   fileName: string;
-  status: string;
+  status: TFileStatus;
   progress: number;
 }
 
 const FileProgress: React.FC<FileProgressProps> = ({ fileName, status, progress }) => {
 
-    const getStatusColor = (status: string) => {
+    const getStatusColor = (status: TFileStatus) => {
         switch (status) {
             case 'success':
                 return 'green';
             case 'error':
                 return 'red';
+            case 'pending':
+                return 'blue';
             default:
                 return 'inherit';
         }
@@ -33,10 +40,30 @@ const FileProgress: React.FC<FileProgressProps> = ({ fileName, status, progress 
         }
     }
 
+    const getFileIcon = (fileName: string) => {
+        const fileExtension = fileName.split('.').pop()?.toLowerCase();
+        switch (fileExtension) {
+            case 'pdf':
+                return <PictureAsPdfIcon className={styles.fileIcon} fontSize='large' />;
+            case 'doc':
+            case 'docx':
+                return <ArticleIcon className={styles.fileIcon} fontSize='large' />;
+            case 'jpg':
+            case 'jpeg':
+            case 'png':
+                return <ImageIcon className={styles.fileIcon} fontSize='large' />;
+            case 'mp4':
+                return <VideoIcon className={styles.fileIcon} fontSize='large' />;
+            default:
+                return <InsertDriveFileIcon className={styles.fileIcon} fontSize='large' />;
+        }
+    }
+    
+
   return (
     <Box className={styles.fileProgressContainer}>
       <Box className={styles.fileInfo}>
-        <InsertDriveFileIcon className={styles.fileIcon} />
+        {getFileIcon(fileName)}
         <Box>
           <Typography className={styles.fileName}>{fileName}</Typography>
           <Typography 
@@ -54,11 +81,12 @@ const FileProgress: React.FC<FileProgressProps> = ({ fileName, status, progress 
           value={Math.round(progress)}
           className={styles.progressBar}
         />
+
         <Typography 
           className={styles.progressPercentage} 
           style={{ color: getStatusColor(status) }}
-        >
-          {`${Math.round(progress)}%`}
+          >
+          {`${status === 'pending' ? Math.min(Math.round(progress), 99) : Math.round(progress)}%`}
         </Typography>
       </Box>
     </Box>
