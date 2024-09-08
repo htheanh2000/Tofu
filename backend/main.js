@@ -5,12 +5,11 @@ const app = express();
 
 const corsOptions = {
     origin: '*', // Change this to your specific domain in production for better security
-    methods: 'GET,OPTIONS,PATCH,DELETE,POST,PUT',
-    allowedHeaders: 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version',
-    credentials: true
+    // methods: 'GET,OPTIONS,PATCH,DELETE,POST,PUT',
+    // allowedHeaders: 'X-CSRF-Token, X-Requested-With, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version',
+    // credentials: true
   };
-  
-  app.use(cors(corsOptions));
+app.use(cors(corsOptions));
 
 // Middleware to parse incoming JSON requests
 app.use(express.json());
