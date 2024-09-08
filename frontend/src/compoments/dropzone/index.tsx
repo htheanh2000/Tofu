@@ -1,16 +1,15 @@
 import { useDropzone } from 'react-dropzone';
-import { LinearProgress, Box, Typography, Button, IconButton } from '@mui/material';
+import { Box } from '@mui/material';
 import useFileUpload from '../../hooks/useFileUpload';
-import { useState, ChangeEvent } from 'react';
 import UploadFileIcon from '@mui/icons-material/UploadFile';
-import CloseIcon from '@mui/icons-material/Close';
 import styles from './styles.module.scss';  // Import the module.scss file
 import FileProgress from '../fileprogress';
+import React, { useCallback } from 'react';
 
 const Dropzone = () => {
     const { files, setFiles, uploadFile } = useFileUpload();
-    const [selectedImage, setSelectedImage] = useState(null);
-    const handleDrop = (acceptedFiles: File[]) => {
+
+    const handleDrop = useCallback((acceptedFiles: File[]) => {
         setFiles(acceptedFiles.map(file => ({ file, status: 'pending' as const })));
         const uploadPromises = acceptedFiles.map(file => uploadFile(file));
         Promise.all(uploadPromises)
@@ -20,8 +19,8 @@ const Dropzone = () => {
             .catch((err) => {
                 console.error("Some uploads failed:", err);
             });
-    };
-
+    }, [setFiles, uploadFile]);
+    
     const { getRootProps, getInputProps } = useDropzone({
         onDrop: handleDrop
     });
@@ -42,7 +41,6 @@ const Dropzone = () => {
                       {...getInputProps()} 
                         className={styles.fileInput}
                         type="file"
-                        // accept="image/*"
                     />
                         <>
                             <UploadFileIcon fontSize='large' className={styles.uploadIcon} />
@@ -54,14 +52,34 @@ const Dropzone = () => {
             </Box>
 
             <Box className={styles.scrollContainer}>
-                {files.map(file => (
-                    <Box key={file.file.name}>
-                        <FileProgress fileName={file.file.name} status={file.status} progress={file.progress ? file.progress : 1} />
-                    </Box>
-                ))}
+                <Box>
+                    {files.some(file => file.status === 'pending') && (
+                        <Box component="h4" className={styles.uploadTitle}>
+                            Uploading files
+                        </Box>
+                    )}
+                    {files.filter(file => file.status === 'pending').map(file => (
+                        <Box key={file.file.name}>
+                            <FileProgress fileName={file.file.name} status={file.status} progress={file.progress ? file.progress : 1} />
+                        </Box>
+                    ))}
+                </Box>
+                <Box>
+                    {files.filter(file => file.status !== 'pending').length > 0 && (
+                        <Box component="h4" className={styles.uploadTitle}>
+                            Uploaded files
+                        </Box>
+                    )}
+                    {files.filter(file => file.status !== 'pending').map(file => (
+                        <Box key={file.file.name}>
+                            <FileProgress fileName={file.file.name} status={file.status} progress={file.progress ? file.progress : 1} />
+                        </Box>
+                    ))}
+                </Box>
+               
             </Box>
         </div>
     );
 };
 
-export default Dropzone;
+export default React.memo(Dropzone);

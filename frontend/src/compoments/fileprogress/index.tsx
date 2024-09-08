@@ -75,20 +75,22 @@ const FileProgress: React.FC<FileProgressProps> = ({ fileName, status, progress 
         </Box>
       </Box>
 
-      <Box className={styles.progressContainer}>
-        <LinearProgress
-          variant="determinate"
-          value={Math.round(progress)}
-          className={styles.progressBar}
-        />
+      {status !== 'success' && (
+        <Box className={styles.progressContainer}>
+          <LinearProgress
+            variant="determinate"
+            value={Math.round(progress)}
+            className={styles.progressBar}
+          />
 
-        <Typography 
-          className={styles.progressPercentage} 
-          style={{ color: getStatusColor(status) }}
-          >
-          {`${status === 'pending' ? Math.min(Math.round(progress), 99) : Math.round(progress)}%`}
-        </Typography>
-      </Box>
+          <Typography 
+            className={styles.progressPercentage} 
+            style={{ color: getStatusColor(status) }}
+            >
+            {`${status === 'pending' ? Math.min(Math.round(progress), 99) : Math.round(progress)}%`}
+          </Typography>
+        </Box>
+      )}
     </Box>
   );
 };
