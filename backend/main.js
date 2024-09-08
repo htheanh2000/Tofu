@@ -3,7 +3,7 @@ const multer = require('multer');
 const cors = require('cors');
 const app = express();
 
-
+export const maxDuration = 15
 // Middleware to parse incoming JSON requests
 app.use(express.json());
 app.use(cors());
