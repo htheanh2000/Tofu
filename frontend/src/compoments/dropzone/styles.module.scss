@@ -1,0 +1,82 @@
+.uploadContainer {
+    margin-bottom: 1rem;
+  }
+  
+  .uploadTitle {
+    font-weight: bold;
+    font-size: 1.25rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .uploadNote {
+    color: #6b7280;  // Tailwind's 'text-gray-500'
+    font-size: 0.875rem;
+  }
+  
+  .uploadFile {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 182px;
+    margin-top: 0.5rem;
+    border-radius: 0.5rem;
+    background-color: #f3f4f6;  // Tailwind's 'bg-gray-100'
+    overflow: hidden;
+    border: 1px dashed #d1d5db;  // Tailwind's 'border-gray-400'
+  }
+  
+  .fileInput {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+  }
+  
+  .previewSelectedImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+  
+  .removeButton {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 30px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+  
+    &:hover {
+      background-color: rgba(255, 255, 255, 1);
+    }
+  }
+  
+  .removeIcon {
+    width: 15px;
+    height: 15px;
+  }
+  
+  .uploadIcon {
+    color: #9ca3af;  // Tailwind's 'text-gray-400'
+  }
+  
+  .uploadFormat {
+    color: #6b7280;  // Tailwind's 'text-gray-500'
+    font-size: 0.875rem;
+    margin-top: 0.5rem;
+  }
+  
+  .scrollContainer {
+    overflow-y: auto;
+    max-height: 350px;
+  }

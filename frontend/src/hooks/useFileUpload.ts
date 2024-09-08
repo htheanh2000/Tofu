@@ -15,6 +15,7 @@ const useFileUpload = () => {
     const uploadFile = (file: File, retries = MAX_RETRIES) => {
         return new Promise<void>((resolve, reject) => {
             const formData = new FormData();
+            
             formData.append("file", file);
 
             const attemptUpload = (retryCount: number) => {
@@ -32,6 +33,7 @@ const useFileUpload = () => {
                     setFiles(prevFiles => prevFiles.map(f =>
                         f.file.name === file.name ? { ...f, status: 'success' as const } : f
                     ));
+                   
                     resolve();
                 })
                 .catch(() => {
